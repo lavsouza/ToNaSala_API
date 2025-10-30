@@ -32,12 +32,20 @@ public class StudentService {
 
     @Transactional
     public StudentResponseDTO create(StudentCreateDTO dto) {
+        // Evita duplicação de e-mail
+        if (repository.existsByEmail(dto.email())) {
+            throw new IllegalArgumentException("E-mail já cadastrado para outro estudante.");
+        }
+
+        // Verifica instituição
         Institution institution = institutionRepository.findById(dto.institutionId())
                 .orElseThrow(() -> new IllegalArgumentException("Instituição não encontrada."));
 
+        // Mapeia e associa instituição
         Student student = mapper.toEntity(dto);
         student.setInstitution(institution);
 
+        // Persiste e retorna resposta
         Student saved = repository.save(student);
         return mapper.toResponseDto(saved);
     }
@@ -47,8 +55,17 @@ public class StudentService {
         Student existing = repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Estudante não encontrado."));
 
+        // Verifica se o novo e-mail já pertence a outro aluno
+        if (dto.email() != null && !dto.email().equals(existing.getEmail())) {
+            if (repository.existsByEmail(dto.email())) {
+                throw new IllegalArgumentException("E-mail já cadastrado para outro estudante.");
+            }
+        }
+
+        // Atualiza dados
         mapper.updateEntityFromDto(dto, existing);
 
+        // Atualiza instituição, se necessário
         if (dto.institutionId() != null) {
             Institution institution = institutionRepository.findById(dto.institutionId())
                     .orElseThrow(() -> new IllegalArgumentException("Instituição não encontrada."));
