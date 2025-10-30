@@ -1,10 +1,6 @@
 package com.tonasala.tonasala_api.service;
 
-import com.tonasala.tonasala_api.dto.*;
-import com.tonasala.tonasala_api.dto.institution.InstitutionCreateDTO;
-import com.tonasala.tonasala_api.dto.institution.InstitutionLoginDTO;
-import com.tonasala.tonasala_api.dto.institution.InstitutionResponseDTO;
-import com.tonasala.tonasala_api.dto.institution.InstitutionUpdateDTO;
+import com.tonasala.tonasala_api.dto.institution.*;
 import com.tonasala.tonasala_api.entity.Institution;
 import com.tonasala.tonasala_api.mapper.InstitutionMapper;
 import com.tonasala.tonasala_api.repository.InstitutionRepository;

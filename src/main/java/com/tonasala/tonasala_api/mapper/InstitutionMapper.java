@@ -1,9 +1,6 @@
 package com.tonasala.tonasala_api.mapper;
 
-import com.tonasala.tonasala_api.dto.*;
-import com.tonasala.tonasala_api.dto.institution.InstitutionCreateDTO;
-import com.tonasala.tonasala_api.dto.institution.InstitutionResponseDTO;
-import com.tonasala.tonasala_api.dto.institution.InstitutionUpdateDTO;
+import com.tonasala.tonasala_api.dto.institution.*;
 import com.tonasala.tonasala_api.entity.Institution;
 import org.springframework.stereotype.Component;
 
